@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Все работы — Anton photo.rzn</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700;900&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0d0d0d;
+    --paper:#fbfaf7;
+    --paper-2:#f0eee8;
+    --accent:#2f4bff;
+    --accent-soft:#e6eaff;
+    --lime:#d6ff3f;
+    --line:rgba(13,13,13,0.1);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    line-height:1.5;
+  }
+  a{color:inherit;text-decoration:none;}
+  .wrap{max-width:1240px;margin:0 auto;padding:0 32px;}
+  h1,h2,h3{font-family:'Unbounded',sans-serif;}
+
+  header{position:fixed;top:18px;left:0;right:0;z-index:100;}
+  nav.pill{
+    max-width:1100px;margin:0 auto;
+    display:flex;justify-content:space-between;align-items:center;
+    background:rgba(251,250,247,0.75);
+    backdrop-filter:blur(14px);
+    border:1px solid var(--line);
+    border-radius:100px;
+    padding:10px 12px 10px 24px;
+  }
+  .logo{font-family:'Unbounded',sans-serif;font-weight:700;font-size:1.05rem;letter-spacing:-0.02em;}
+  .logo b{color:var(--accent);}
+  .back-link{
+    background:var(--ink);color:var(--paper);
+    padding:11px 22px;border-radius:100px;font-size:0.85rem;font-weight:600;
+    transition:background .2s;
+  }
+  .back-link:hover{background:var(--accent);}
+
+  main{padding-top:150px;padding-bottom:100px;}
+  .page-head{margin-bottom:50px;}
+  .eyebrow{
+    font-family:'Space Mono',monospace;font-size:0.78rem;color:var(--accent);
+    text-transform:uppercase;letter-spacing:0.08em;margin-bottom:12px;display:block;
+  }
+  .page-head h1{font-weight:700;font-size:clamp(2rem,4.5vw,3rem);letter-spacing:-0.01em;margin-bottom:14px;}
+  .page-head p{max-width:46ch;color:#6b6a67;font-size:1rem;}
+
+  .full-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:16px;
+  }
+  .g-item{
+    position:relative;overflow:hidden;border-radius:20px;border:1px solid var(--line);
+    cursor:pointer;aspect-ratio:3/4;
+  }
+  .g-item img{
+    width:100%;height:100%;object-fit:cover;display:block;
+    transition:transform .5s ease;
+  }
+  .g-item:hover img{transform:scale(1.06);}
+
+  .cta-block{
+    margin-top:70px;background:var(--ink);color:var(--paper);border-radius:32px;
+    padding:50px 44px;text-align:center;
+  }
+  .cta-block h2{font-size:1.7rem;font-weight:700;margin-bottom:14px;}
+  .cta-block p{color:rgba(251,250,247,0.65);margin-bottom:26px;}
+  .btn-primary{
+    background:var(--lime);color:var(--ink);
+    padding:15px 30px;border-radius:100px;font-weight:600;font-size:0.9rem;
+    display:inline-block;transition:background .2s,transform .2s;
+  }
+  .btn-primary:hover{background:var(--paper);transform:translateY(-2px);}
+
+  .lightbox{
+    position:fixed;inset:0;background:rgba(13,13,13,0.92);
+    display:flex;align-items:center;justify-content:center;
+    z-index:200;opacity:0;pointer-events:none;transition:opacity .25s;
+    padding:40px;cursor:zoom-out;
+  }
+  .lightbox.open{opacity:1;pointer-events:auto;}
+  .lightbox img{max-width:90%;max-height:90%;border-radius:12px;}
+
+  footer{padding:44px 0 20px;text-align:center;font-size:0.85rem;color:#6b6a67;}
+
+  @media (max-width: 900px){
+    .full-grid{grid-template-columns:repeat(2,1fr);}
+    main{padding-top:120px;}
+    .cta-block{padding:36px 24px;border-radius:24px;}
+  }
+  @media (max-width: 560px){
+    .full-grid{grid-template-columns:1fr;}
+  }
+  :focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
+  @media (prefers-reduced-motion: reduce){
+    *{transition:none !important;scroll-behavior:auto !important;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="pill wrap" style="max-width:1100px;">
+    <div class="logo">Anton photo<b>.</b>rzn</div>
+    <a href="index.html" class="back-link">← На главную</a>
+  </nav>
+</header>
+
+<main class="wrap">
+  <div class="page-head">
+    <span class="eyebrow">Портфолио</span>
+    <h1>Все работы</h1>
+    <p>Подборка примеров съёмок, после которых вы сможете оценить мой стиль и подход.</p>
+  </div>
+
+  <div class="full-grid" id="fullGrid">
+    <div class="g-item"><img src="images/gallery-01.jpg" alt="работа 1"></div>
+    <div class="g-item"><img src="images/gallery-02.jpg" alt="работа 2"></div>
+    <div class="g-item"><img src="images/gallery-03.jpg" alt="работа 3"></div>
+    <div class="g-item"><img src="images/gallery-04.jpg" alt="работа 4"></div>
+    <div class="g-item"><img src="images/gallery-05.jpg" alt="работа 5"></div>
+    <div class="g-item"><img src="images/gallery-06.jpg" alt="работа 6"></div>
+    <div class="g-item"><img src="images/gallery-07.jpg" alt="работа 7"></div>
+    <div class="g-item"><img src="images/gallery-08.jpg" alt="работа 8"></div>
+    <div class="g-item"><img src="images/gallery-09.jpg" alt="работа 9"></div>
+    <div class="g-item"><img src="images/gallery-10.jpg" alt="работа 10"></div>
+    <div class="g-item"><img src="images/gallery-11.jpg" alt="работа 11"></div>
+    <div class="g-item"><img src="images/gallery-12.jpg" alt="работа 12"></div>
+    <div class="g-item"><img src="images/gallery-13.jpg" alt="работа 13"></div>
+    <div class="g-item"><img src="images/gallery-14.jpg" alt="работа 14"></div>
+    <div class="g-item"><img src="images/gallery-15.jpg" alt="работа 15"></div>
+    <div class="g-item"><img src="images/gallery-16.jpg" alt="работа 16"></div>
+    <div class="g-item"><img src="images/gallery-17.jpg" alt="работа 17"></div>
+    <div class="g-item"><img src="images/gallery-18.jpg" alt="работа 18"></div>
+    <div class="g-item"><img src="images/gallery-19.jpg" alt="работа 19"></div>
+    <div class="g-item"><img src="images/gallery-20.jpg" alt="работа 20"></div>
+    <div class="g-item"><img src="images/gallery-21.jpg" alt="работа 21"></div>
+    <div class="g-item"><img src="images/gallery-22.jpg" alt="работа 22"></div>
+    <div class="g-item"><img src="images/gallery-23.jpg" alt="работа 23"></div>
+    <div class="g-item"><img src="images/gallery-24.jpg" alt="работа 24"></div>
+    <div class="g-item"><img src="images/gallery-25.jpg" alt="работа 25"></div>
+    <div class="g-item"><img src="images/gallery-26.jpg" alt="работа 26"></div>
+    <div class="g-item"><img src="images/gallery-27.jpg" alt="работа 27"></div>
+  </div>
+
+  <div class="cta-block">
+    <h2>Хотите такую же съёмку?</h2>
+    <p>Напишите — обсудим формат, дату и локацию.</p>
+    <a href="index.html#contact" class="btn-primary">Оставить заявку →</a>
+  </div>
+</main>
+
+<footer>© <span id="year"></span> Anton photo.rzn</footer>
+
+<div class="lightbox" id="lightbox"><img id="lightbox-img" src="" alt=""></div>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  document.querySelectorAll('.g-item').forEach(item=>{
+    item.addEventListener('click', ()=>{
+      const img = item.querySelector('img');
+      const modal = document.getElementById('lightbox');
+      document.getElementById('lightbox-img').src = img.src;
+      modal.classList.add('open');
+    });
+  });
+  const lb = document.getElementById('lightbox');
+  lb.addEventListener('click', ()=> lb.classList.remove('open'));
+</script>
+
+</body>
+</html>

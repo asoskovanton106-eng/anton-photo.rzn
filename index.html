@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+
+<html lang="ru">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Anton photo.rzn</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700;900&amp;family=Inter:wght@400;500;600;700&amp;family=Space+Mono:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<style>
+  :root{
+    --ink:#0d0d0d;
+    --paper:#fbfaf7;
+    --paper-2:#f0eee8;
+    --accent:#2f4bff;
+    --accent-soft:#e6eaff;
+    --lime:#d6ff3f;
+    --line:rgba(13,13,13,0.1);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    line-height:1.5;
+    overflow-x:hidden;
+    cursor:default;
+  }
+  a{color:inherit;text-decoration:none;}
+  .wrap{max-width:1240px;margin:0 auto;padding:0 32px;}
+  h1,h2,h3{font-family:'Unbounded',sans-serif;}
+
+  header{position:fixed;top:18px;left:0;right:0;z-index:100;}
+  nav.pill{
+    max-width:1100px;margin:0 auto;
+    display:flex;justify-content:space-between;align-items:center;
+    background:rgba(251,250,247,0.75);
+    backdrop-filter:blur(14px);
+    border:1px solid var(--line);
+    border-radius:100px;
+    padding:10px 12px 10px 24px;
+  }
+  .logo{font-family:'Unbounded',sans-serif;font-weight:700;font-size:1.05rem;letter-spacing:-0.02em;}
+  .logo b{color:var(--accent);}
+  .nav-links{display:flex;gap:28px;font-size:0.86rem;font-weight:500;}
+  .nav-links a{opacity:0.65;transition:opacity .2s;}
+  .nav-links a:hover{opacity:1;}
+  .nav-cta{
+    background:var(--ink);color:var(--paper);
+    padding:11px 22px;border-radius:100px;font-size:0.85rem;font-weight:600;
+    transition:background .2s;
+  }
+  .nav-cta:hover{background:var(--accent);}
+
+  .hero{
+    min-height:100vh;display:flex;flex-direction:column;justify-content:center;
+    padding-top:120px;position:relative;
+  }
+  .hero-grid{display:grid;grid-template-columns:1.15fr 0.85fr;gap:50px;align-items:center;}
+  .hero-tag{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:'Space Mono',monospace;font-size:0.78rem;
+    background:var(--accent-soft);color:var(--accent);
+    padding:8px 16px;border-radius:100px;margin-bottom:28px;
+  }
+  .hero-tag::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--accent);}
+  .hero h1{
+    font-weight:700;font-size:clamp(2.6rem,5.6vw,4.6rem);
+    line-height:1.02;letter-spacing:-0.02em;
+  }
+  .hero h1 .outline{-webkit-text-stroke:1.5px var(--ink);color:transparent;}
+  .hero-sub{margin-top:26px;max-width:42ch;font-size:1.08rem;color:#4a4a48;}
+  .hero-actions{margin-top:38px;display:flex;gap:16px;flex-wrap:wrap;align-items:center;}
+  .btn-primary{
+    background:var(--ink);color:var(--paper);
+    padding:16px 30px;border-radius:100px;font-weight:600;font-size:0.92rem;
+    display:inline-flex;align-items:center;gap:10px;
+    transition:background .2s,transform .2s;
+  }
+  .btn-primary:hover{background:var(--accent);transform:translateY(-2px);}
+  .btn-outline{
+    border:1.5px solid var(--ink);padding:14.5px 28px;border-radius:100px;
+    font-weight:600;font-size:0.92rem;transition:all .2s;
+  }
+  .btn-outline:hover{background:var(--ink);color:var(--paper);}
+
+  .hero-visual{
+    aspect-ratio:3/4;border-radius:28px;position:relative;overflow:hidden;
+    background:linear-gradient(155deg,#dfe4ff 0%,#f0eee8 45%,#d6ff3f 130%);
+    border:1px solid var(--line);
+  }
+  .hero-badge{
+    position:absolute;bottom:18px;left:18px;
+    background:rgba(13,13,13,0.75);color:var(--paper);
+    font-family:'Space Mono',monospace;font-size:0.72rem;letter-spacing:0.04em;
+    padding:10px 16px;border-radius:100px;
+    backdrop-filter:blur(4px);
+  }
+  .marquee-wrap{
+    border-top:1.5px solid var(--ink);border-bottom:1.5px solid var(--ink);
+    overflow:hidden;white-space:nowrap;margin-top:90px;background:var(--ink);
+  }
+  .marquee{
+    display:inline-block;padding:16px 0;
+    font-family:'Unbounded',sans-serif;font-weight:600;font-size:1.1rem;
+    color:var(--paper);
+    animation:scroll 24s linear infinite;
+  }
+  .marquee span{margin:0 28px;color:var(--paper);}
+  .marquee span.accent{color:var(--lime);}
+  @keyframes scroll{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+  .section{padding:120px 0;}
+  .section-head{
+    display:flex;justify-content:space-between;align-items:flex-end;
+    margin-bottom:56px;gap:24px;flex-wrap:wrap;
+  }
+  .eyebrow{
+    font-family:'Space Mono',monospace;font-size:0.78rem;color:var(--accent);
+    text-transform:uppercase;letter-spacing:0.08em;margin-bottom:12px;display:block;
+  }
+  .section-head h2{font-weight:700;font-size:clamp(1.9rem,3.6vw,2.7rem);letter-spacing:-0.01em;}
+  .section-head p{max-width:32ch;color:#6b6a67;font-size:0.95rem;}
+
+  .about-grid{display:grid;grid-template-columns:0.85fr 1.15fr;gap:64px;align-items:center;}
+  .about-photo{
+    aspect-ratio:1/1;border-radius:24px;position:relative;overflow:hidden;
+    background:linear-gradient(150deg,#0d0d0d,#2f4bff 120%);
+    border:1px solid var(--line);
+  }
+  .about-text p{color:#4a4a48;margin-bottom:18px;font-size:1.03rem;}
+  .about-stats{display:flex;gap:36px;margin-top:36px;flex-wrap:wrap;}
+  .about-stats div{border-left:2px solid var(--ink);padding-left:16px;}
+  .about-stats b{font-family:'Unbounded',sans-serif;font-size:2rem;display:block;}
+  .about-stats span{font-size:0.78rem;color:#6b6a67;font-family:'Space Mono',monospace;}
+
+  .why-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+  .why-item{
+    background:var(--paper-2);border:1px solid var(--line);border-radius:20px;
+    padding:30px 26px;transition:transform .25s;
+  }
+  .why-item:hover{transform:translateY(-4px);}
+  .why-num{
+    display:inline-flex;align-items:center;justify-content:center;
+    width:38px;height:38px;border-radius:50%;background:var(--accent);color:var(--paper);
+    font-weight:700;margin-bottom:18px;
+  }
+  .why-item h3{font-size:1.1rem;font-weight:600;margin-bottom:10px;}
+  .why-item p{font-size:0.9rem;color:#6b6a67;}
+
+  .bento{grid-template-columns:repeat(4,1fr);grid-auto-rows:170px;gap:14px;display:grid;}
+  .b-item{position:relative;overflow:hidden;border-radius:20px;border:1px solid var(--line);cursor:pointer;}
+  .b-item img{
+    width:100%;height:100%;object-fit:cover;display:block;
+    transition:transform .5s ease;
+  }
+  .b-item:hover img{transform:scale(1.08);}
+  .b-item .ph{
+    width:100%;height:100%;display:flex;align-items:center;justify-content:center;
+    font-family:'Space Mono',monospace;font-size:0.7rem;color:rgba(13,13,13,0.4);
+    transition:transform .5s ease;
+  }
+  .b-item:hover .ph{transform:scale(1.08);}
+  .b1{grid-column:span 2;grid-row:span 2;background:linear-gradient(140deg,#e6eaff,#2f4bff 150%);}
+  .b2{grid-column:span 1;grid-row:span 1;background:linear-gradient(140deg,#d6ff3f,#f0eee8 140%);}
+  .b3{grid-column:span 1;grid-row:span 1;background:linear-gradient(140deg,#0d0d0d,#4a4a48);}
+  .b4{grid-column:span 1;grid-row:span 2;background:linear-gradient(160deg,#f0eee8,#2f4bff 160%);}
+  .b5{grid-column:span 1;grid-row:span 1;background:linear-gradient(140deg,#2f4bff,#d6ff3f 150%);}
+  .b6{grid-column:span 2;grid-row:span 1;background:linear-gradient(120deg,#0d0d0d,#2f4bff 140%);}
+  .b7{grid-column:span 1;grid-row:span 1;background:linear-gradient(140deg,#f0eee8,#0d0d0d 160%);}
+
+  .services{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+  .service-card{
+    background:var(--paper-2);border-radius:24px;padding:36px 30px;
+    transition:transform .25s,background .25s;border:1px solid var(--line);
+  }
+  .service-card:hover{transform:translateY(-6px);background:var(--ink);color:var(--paper);}
+  .service-card:hover .service-num{color:var(--lime);}
+  .service-card:hover .service-price span{color:rgba(251,250,247,0.6);}
+  .service-num{font-family:'Space Mono',monospace;font-size:0.8rem;color:var(--accent);display:block;margin-bottom:24px;}
+  .service-card h3{font-size:1.35rem;font-weight:600;margin-bottom:12px;}
+  .service-card p{font-size:0.92rem;opacity:0.75;margin-bottom:26px;}
+  .service-price{display:flex;justify-content:space-between;align-items:baseline;font-family:'Space Mono',monospace;}
+  .service-price b{font-family:'Unbounded',sans-serif;font-size:1.3rem;}
+  .service-price span{font-size:0.78rem;color:#6b6a67;}
+
+  .contact-block{
+    background:var(--ink);color:var(--paper);border-radius:32px;
+    padding:70px 60px;display:grid;grid-template-columns:1fr 1fr;gap:60px;
+  }
+  .contact-info h2{font-size:2.4rem;font-weight:700;margin-bottom:20px;letter-spacing:-0.02em;}
+  .contact-info p{color:rgba(251,250,247,0.65);margin-bottom:32px;max-width:38ch;}
+  .contact-item{display:flex;flex-direction:column;gap:4px;margin-bottom:22px;}
+  .contact-item span{font-family:'Space Mono',monospace;font-size:0.72rem;color:var(--lime);text-transform:uppercase;letter-spacing:0.08em;}
+  .contact-item a,.contact-item div{font-size:1.1rem;font-weight:500;}
+  form{display:flex;flex-direction:column;gap:20px;}
+  .field{display:flex;flex-direction:column;gap:8px;}
+  .field label{font-family:'Space Mono',monospace;font-size:0.72rem;color:rgba(251,250,247,0.55);text-transform:uppercase;letter-spacing:0.05em;}
+  .field input,.field textarea{
+    background:rgba(251,250,247,0.06);border:1px solid rgba(251,250,247,0.18);
+    border-radius:14px;color:var(--paper);font-family:'Inter',sans-serif;font-size:0.98rem;
+    padding:14px 16px;outline:none;transition:border-color .2s;resize:none;
+  }
+  .field input:focus,.field textarea:focus{border-color:var(--lime);}
+  .field input::placeholder,.field textarea::placeholder{color:rgba(251,250,247,0.35);}
+  form .btn-primary{background:var(--lime);color:var(--ink);border:none;cursor:pointer;margin-top:6px;align-self:flex-start;}
+  form .btn-primary:hover{background:var(--paper);}
+  .form-note{font-size:0.78rem;color:rgba(251,250,247,0.45);margin-top:-8px;}
+
+  .qr-strip{
+    display:flex;gap:16px;flex-wrap:wrap;
+    border-top:1px solid var(--line);padding-top:44px;
+  }
+  .qr-item{
+    display:flex;flex-direction:column;align-items:center;gap:12px;
+    background:var(--paper-2);border:1px solid var(--line);border-radius:20px;
+    padding:22px;flex:1;min-width:150px;
+  }
+  .qr-item img{width:110px;height:110px;border-radius:10px;object-fit:cover;}
+  .qr-item span{font-family:'Space Mono',monospace;font-size:0.8rem;color:#4a4a48;}
+
+  .lightbox{
+    position:fixed;inset:0;background:rgba(13,13,13,0.92);
+    display:flex;align-items:center;justify-content:center;
+    z-index:200;opacity:0;pointer-events:none;transition:opacity .25s;
+    padding:40px;cursor:zoom-out;
+  }
+  .lightbox.open{opacity:1;pointer-events:auto;}
+  .lightbox img{max-width:90%;max-height:90%;border-radius:12px;}
+
+  footer{
+    padding:44px 0;display:flex;justify-content:space-between;align-items:center;
+    flex-wrap:wrap;gap:16px;font-size:0.85rem;color:#6b6a67;
+  }
+  footer .socials{display:flex;gap:22px;}
+  footer .socials a{transition:color .2s;}
+  footer .socials a:hover{color:var(--accent);}
+
+  @media (max-width: 900px){
+    .nav-links{display:none;}
+    .hero-grid,.about-grid,.contact-block{grid-template-columns:1fr;}
+    .services{grid-template-columns:1fr;}
+    .why-strip{grid-template-columns:1fr;}
+    .qr-strip{flex-direction:column;}
+    .bento{grid-template-columns:repeat(2,1fr);grid-auto-rows:150px;}
+    .b1,.b4{grid-column:span 2;grid-row:span 1;}
+    .b6{grid-column:span 2;}
+    .contact-block{padding:44px 28px;border-radius:24px;}
+    .section{padding:80px 0;}
+  }
+  :focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
+  @media (prefers-reduced-motion: reduce){
+    *{transition:none !important;scroll-behavior:auto !important;animation:none !important;}
+  }
+</style>
+</head>
+<body>
+<header>
+<nav class="pill wrap" style="max-width:1100px;">
+<div class="logo">Anton photo<b>.</b>rzn</div>
+<div class="nav-links">
+<a href="#work">Портфолио</a>
+<a href="#about">Обо мне</a>
+<a href="#services">Услуги</a>
+</div>
+<a class="nav-cta" href="#contact">Написать →</a>
+</nav>
+</header>
+<section class="hero">
+<div class="wrap hero-grid">
+<div>
+<div class="hero-tag">ВАШ ФОТОГРАФ ИЗ РЯЗАНИ</div>
+<h1>Снимаю <span class="outline">людей</span><br/>настоящими</h1>
+<p class="hero-sub">Уличная и студийная съёмка, свадьбы, дни рождения и другие мероприятия. Ищу не позу, а момент — то, что остаётся, когда человек перестаёт думать о камере.</p>
+<div class="hero-actions">
+<a class="btn-primary" href="#work">Смотреть работы ↓</a>
+<a class="btn-outline" href="#contact">Обсудить съёмку</a>
+</div>
+</div>
+<div class="hero-visual">
+<img alt="Из последних работ" src="images/hero.jpg" style="width:100%;height:100%;object-fit:cover;"/>
+<div class="hero-badge">Из последней съёмки</div>
+</div>
+</div>
+<div class="marquee-wrap">
+<div class="marquee">
+<span>УЛИЧНАЯ СЪЁМКА</span><span class="accent">·</span><span>СТУДИЙНАЯ СЪЁМКА</span><span class="accent">·</span><span>СВАДЬБЫ</span><span class="accent">·</span><span>ДНИ РОЖДЕНИЯ</span><span class="accent">·</span><span>МЕРОПРИЯТИЯ</span><span class="accent">·</span>
+<span>УЛИЧНАЯ СЪЁМКА</span><span class="accent">·</span><span>СТУДИЙНАЯ СЪЁМКА</span><span class="accent">·</span><span>СВАДЬБЫ</span><span class="accent">·</span><span>ДНИ РОЖДЕНИЯ</span><span class="accent">·</span><span>МЕРОПРИЯТИЯ</span><span class="accent">·</span>
+</div>
+</div>
+</section>
+<section class="section" id="about">
+<div class="wrap about-grid">
+<div class="about-photo"><img alt="Антон, фотограф" src="images/author.jpg" style="width:100%;height:100%;object-fit:cover;"/></div>
+<div class="about-text">
+<span class="eyebrow">Обо мне</span>
+<h2 style="font-size:2.1rem;font-weight:700;margin-bottom:22px;letter-spacing:-0.01em;">Фотограф из Рязани</h2>
+<p>Фотографией увлекался всегда — сначала это был просто интерес к тому, как свет и ракурс меняют кадр, а со временем перерос в осознанное развитие себя в этой сфере. Сегодня это не просто хобби, а дело, в которое вкладываюсь всерьёз.</p>
+<p>За плечами уже немало съёмок и довольных клиентов — от уличных прогулок до постановочных студийных кадров и репортажа с мероприятий. Для меня каждая съёмка — это в первую очередь про человека, а не про технику: важно, чтобы вы забыли о камере и просто были собой.</p>
+<div class="about-stats">
+<div><b>25+</b><span>съёмок</span></div>
+<div><b>3</b><span>направления</span></div>
+<div><b>24ч</b><span>ответ на заявку</span></div>
+</div>
+</div>
+</div>
+</section>
+<section class="section" style="padding-top:0;">
+<div class="wrap">
+<div class="why-strip">
+<div class="why-item">
+<span class="why-num">→</span>
+<h3>Живые эмоции</h3>
+<p>Не гонюсь за идеальной позой — ловлю момент, когда вы забываете о камере.</p>
+</div>
+<div class="why-item">
+<span class="why-num">→</span>
+<h3>Быстрая обработка</h3>
+<p>Готовые фото — в течение недели после съёмки, без долгого ожидания.</p>
+</div>
+<div class="why-item">
+<span class="why-num">→</span>
+<h3>Гибкий формат</h3>
+<p>Улица, студия или праздник — подстроюсь под вашу идею и локацию.</p>
+</div>
+</div>
+</div>
+</section>
+<section class="section" id="work">
+<div class="wrap">
+<div class="section-head">
+<div>
+<span class="eyebrow">Портфолио</span>
+<h2>Примеры работ</h2>
+</div>
+</div>
+<div class="bento">
+<div class="b-item b1"><img alt="работа" src="images/portfolio-01.jpg"/></div>
+<div class="b-item b2"><img alt="работа" src="images/portfolio-02.jpg"/></div>
+<div class="b-item b3"><img alt="работа" src="images/portfolio-03.jpg"/></div>
+<div class="b-item b4"><img alt="работа" src="images/portfolio-04.jpg"/></div>
+<div class="b-item b5"><img alt="работа" src="images/portfolio-05.jpg"/></div>
+<div class="b-item b6"><img alt="работа" src="images/portfolio-06.jpg"/></div>
+<div class="b-item b7"><img alt="работа" src="images/portfolio-07.jpg"/></div>
+</div>
+<div style="text-align:center;margin-top:36px;">
+<a class="btn-outline" href="gallery.html">Смотреть все работы →</a>
+</div>
+</div>
+</section>
+<section class="section" id="services">
+<div class="wrap">
+<div class="section-head">
+<div>
+<span class="eyebrow">Услуги</span>
+<h2>Форматы съёмки</h2>
+</div>
+</div>
+<div class="services">
+<div class="service-card">
+<span class="service-num">01</span>
+<h3>Уличная съёмка</h3>
+<p>Съёмка на локации по вашему выбору, естественный свет и городская атмосфера. 15-20 фото в обработке.</p>
+<div class="service-price"><span></span><b>от 2000 ₽</b></div>
+</div>
+<div class="service-card">
+<span class="service-num">02</span>
+<h3>Студийная съёмка</h3>
+<p>Съёмка в студии с постановочным светом. 1 час, 15-20 фото в обработке.</p>
+<div class="service-price"><span></span><b>от 2500 ₽</b></div>
+<div class="service-price"><span></span><b>+ студия</b></div>
+
+</div>
+<div class="service-card">
+<span class="service-num">03</span>
+<h3>Свадьбы, дни рождения и другие мероприятия</h3>
+<p>Репортажная съёмка торжеств и праздников, без ограничения кадров.</p>
+<div class="service-price"><span></span><b>от 3000 ₽/ч</b></div>
+</div>
+</div>
+<p style="margin-top:28px;font-family:'Space Mono',monospace;font-size:0.85rem;color:#6b6a67;">Все исходники со съёмки — за 1500 ₽ дополнительно.</p>
+</div>
+</section>
+<section class="section" id="contact">
+<div class="wrap">
+<div class="contact-block">
+<div class="contact-info">
+<h2>Обсудим съёмку?</h2>
+<p>Напиши формат, дату и локацию — отвечу в течение суток с идеями и стоимостью.</p>
+<div class="contact-item"><span>Telegram</span><a href="https://t.me/Lqkwrkc" target="_blank">@Lqkwrkc</a></div>
+<div class="contact-item"><span>Почта</span><a href="mailto:anthonasoskov@yandex.ru">anthonasoskov@yandex.ru</a></div>
+<div class="contact-item"><span>Город</span><div>Рязань · выезд по договорённости</div></div>
+</div>
+<form action="https://formspree.io/f/mrpzevek" id="contactForm" method="POST">
+<div class="field">
+<label for="name">Имя</label>
+<input id="name" name="Имя" placeholder="Как к вам обращаться" required="" type="text"/>
+</div>
+<div class="field">
+<label for="contact">Telegram или почта</label>
+<input id="contact" name="Контакт" placeholder="Куда ответить" required="" type="text"/>
+</div>
+<div class="field">
+<label for="msg">Сообщение</label>
+<textarea id="msg" name="Сообщение" placeholder="Формат съёмки, дата, пожелания" rows="4"></textarea>
+</div>
+<button class="btn-primary" id="submitBtn" type="submit">Отправить заявку →</button>
+</form>
+</div>
+</div>
+</section>
+<section class="section" style="padding-top:0;padding-bottom:70px;">
+<div class="wrap">
+<div class="qr-strip">
+<div class="qr-item">
+<img alt="VK" src="images/qr-vk.png"/>
+<span>ВКонтакте</span>
+</div>
+<div class="qr-item">
+<img alt="Telegram" src="images/qr-telegram.png"/>
+<span>Telegram</span>
+</div>
+<div class="qr-item">
+<img alt="Instagram" src="images/qr-instagram.png"/>
+<span>Instagram</span>
+</div>
+</div>
+</div>
+</section>
+<footer class="wrap">
+<div>© <span id="year"></span> Anton photo.rzn</div>
+<div class="socials">
+<a href="#" target="_blank">Instagram</a>
+<a href="https://vk.ru/lqkwrkc" target="_blank">VK</a>
+<a href="https://t.me/Lqkwrkc" target="_blank">Telegram</a>
+</div>
+</footer>
+<div class="lightbox" id="lightbox"><img alt="" id="lightbox-img" src=""/></div>
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  document.querySelectorAll('.b-item').forEach(item=>{
+    item.addEventListener('click', ()=>{
+      const img = item.querySelector('img');
+      if(!img) return;
+      const modal = document.getElementById('lightbox');
+      document.getElementById('lightbox-img').src = img.src;
+      modal.classList.add('open');
+    });
+  });
+  const lb = document.getElementById('lightbox');
+  lb.addEventListener('click', ()=> lb.classList.remove('open'));
+
+  document.getElementById('contactForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    const form = this;
+    const btn = document.getElementById('submitBtn');
+    const originalText = btn.textContent;
+    btn.textContent = 'Отправка...';
+    btn.disabled = true;
+
+    fetch(form.action, {
+      method: 'POST',
+      body: new FormData(form),
+      headers: { 'Accept': 'application/json' }
+    }).then(response => {
+      if (response.ok) {
+        form.innerHTML = '<p style="font-size:1.05rem;font-weight:600;color:var(--lime);">Спасибо! Заявка отправлена — отвечу в течение суток.</p>';
+      } else {
+        btn.textContent = originalText;
+        btn.disabled = false;
+        alert('Не получилось отправить. Попробуйте написать в Telegram напрямую.');
+      }
+    }).catch(() => {
+      btn.textContent = originalText;
+      btn.disabled = false;
+      alert('Не получилось отправить. Попробуйте написать в Telegram напрямую.');
+    });
+  });
+</script>
+</body>
+</html>
